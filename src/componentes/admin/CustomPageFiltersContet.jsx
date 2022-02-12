@@ -181,7 +181,7 @@ const CustomPageFiltersContet = () => {
                             Enter The  Value You Wanted to be Filtered
                         </h2>
                         <div className="inputWrapper mt-4">
-                            <input type={valueType === "Integer" ? "number" : 'text'} value={filterValue} onChange={(e) => setFilterValue(e.target.value)} maxLength={filterCondition == "Starting With" && 1 || filterCondition == "Ending With" && 1} placeholder='Enter the value you wanted to be filtered ' />
+                            <input type={valueType === "Integer" ? "number" : 'text'} value={filterValue} onChange={(e) => setFilterValue(e.target.value)} maxLength={(filterCondition === "Starting With" && 1 )||( filterCondition === "Ending With" && 1)} placeholder='Enter the value you wanted to be filtered ' />
                         </div>
                         <div className="flex justify-center w-full mt-4">
                             <button className="btn btn-primary" data-text='Generate Results' onClick={generateResults}>
