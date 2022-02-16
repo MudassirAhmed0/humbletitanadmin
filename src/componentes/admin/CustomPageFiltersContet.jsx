@@ -67,6 +67,7 @@ const CustomPageFiltersContet = () => {
         let valueType = e.target.children[0].innerText
         setValueType(valueType)
         setFilterValue('')
+        setIsPublished(false)
     }
 
     const handleFilterCondition = (e) => {
@@ -78,10 +79,14 @@ const CustomPageFiltersContet = () => {
         let valueType = e.target.children[0].innerText
         setFilterCondition(valueType)
         setFilterValue('')
+        
+        setIsPublished(false)
     }
 
     const handleFilter = (newValue) => {
         setFilter(newValue.value)
+        
+        setIsPublished(false)
     }
     const filtertionOfFilteredData = (filtered) => {
         
@@ -107,6 +112,8 @@ const CustomPageFiltersContet = () => {
 
     const generateResults = () => {
         let url = ''
+        
+        setIsPublished(false)
         switch (filterCondition) {
             case "Equal To":
                 url = `https://humbletitanapi.herokuapp.com/getEqualTo/all${tableName}?label=${filter.toLowerCase()}&value=${filterValue}`
