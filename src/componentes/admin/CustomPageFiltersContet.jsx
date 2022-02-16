@@ -19,6 +19,7 @@ const CustomPageFiltersContet = () => {
     const [allCompanies, setAllCompanies] = useState([])
     const [allFilteredCompanies, setAllFilteredCompanies] = useState([])
     const [loading,setLoading] = useState(false)
+    const [isPublished,setIsPublished] = useState(false)
 
     useEffect(() => {
         switch (tableName) {
@@ -53,7 +54,7 @@ const CustomPageFiltersContet = () => {
 
     const publishPage =()=>{
         axios.post(`https://humbletitanapi.herokuapp.com/filteredData?filterlabel=${filter}&filterCondition=${filterCondition}&filterValue=${filterValue}`,filteredData)
-        .then((res)=>console.log(res.data))
+        .then((res)=> setIsPublished(true))
         .catch(err=>console.log(err))
     }
 
@@ -243,11 +244,11 @@ const CustomPageFiltersContet = () => {
 
                             </button>
                         </div>
-
+{isPublished &&
                         <div className="flex justify-center w-full mt-4 dir-col align-center">
                             <p className="text-22 text-blue ">Your Page is Succesfully Published!</p>
                             <a target={"_blank"} className=' text-blue text-underline mt-1' href={`https://humbletitan.vercel.app/filtered-data?filterlabel=${filter}&filterCondition=${filterCondition}&filterValue=${filterValue}`}>{`https://humbletitan.vercel.app/filtered-data?filterlabel=${filter}&filterCondition=${filterCondition}&filterValue=${filterValue}`}</a>
-                        </div>
+                        </div>}
             </>
           
 
