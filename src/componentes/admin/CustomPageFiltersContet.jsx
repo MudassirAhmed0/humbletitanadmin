@@ -51,6 +51,12 @@ const CustomPageFiltersContet = () => {
     const filterConditionForInteger = ["Equal To", "Less Than", "Greater Than"]
     const filterConditionForString = ["Equal To", "Starting With", "Ending With"]
 
+    const publishPage =()=>{
+        axios.post(`https://humbletitanapi.herokuapp.com/filteredData?filterlabel=${filter}&filterCondition=${filterCondition}&filterValue=${filterValue}`,filteredData)
+        .then((res)=>console.log(res.data))
+        .catch(err=>console.log(err))
+    }
+
     const handleValueType = (e) => {
         document.querySelectorAll(".valueType").forEach(item => { item.classList.add('text-blue'); item.classList.add('bg-light-blue'); item.classList.remove('text-white'); item.classList.remove('bg-blue') })
         e.target.classList.add('text-white')
@@ -80,8 +86,16 @@ const CustomPageFiltersContet = () => {
         
         const fD = filtered
         // fD.sort((a, b) => a?.Info[filter.toLocaleLowerCase()] - b?.Info[filter.toLocaleLowerCase()])
-         
-        setFilteredData([...fD])
+         let newData =[]
+         if(fD.length > 50){
+            for( let i = 1;i<=50 ;i ++){
+                newData.push(fD[i])
+            }
+            setFilteredData([...newData])
+         }else{
+
+             setFilteredData([...fD])
+         }
         let newCompanies=[]
         // fD.map(item=>{
         //     allCompanies.map(i=> item?.Symbol === i?.Symbol && newCompanies.push(i) )
@@ -191,7 +205,7 @@ const CustomPageFiltersContet = () => {
                     </>
                 }
             </div>
-          {loading ? "Loading...":   filteredData && <div className="filteredTable  bg-light-blue mt-4">
+          { loading ? "Loading...":   filteredData.length > 0 && <> <div className="filteredTable  bg-light-blue mt-4">
                 <div className="p-1 flex justify-between">
                     <div className="col-4">
                         <span><h4 className='text-24 text-blue'>Company Symbol</h4></span>
@@ -223,10 +237,22 @@ const CustomPageFiltersContet = () => {
                
                     
                 }
-                {/* <div className="col-3">
-<span><strong>Company Name</strong></span>
-                </div> */}
-            </div>}
+            </div>
+                <div className="flex justify-center w-full mt-4">
+                            <button className="btn btn-primary" data-text='Publish Page ' onClick={publishPage}>
+
+                            </button>
+                        </div>
+
+                        <div className="flex justify-center w-full mt-4 dir-col align-center">
+                            <p className="text-22 text-blue ">Your Page is Succesfully Published!</p>
+                            <a target={"_blank"} className=' text-blue text-underline mt-1' href={`https://humbletitan.vercel.app/filtered-data?filterlabel=${filter}&filterCondition=${filterCondition}&filterValue=${filterValue}`}>{`https://humbletitan.vercel.app/filtered-data?filterlabel=${filter}&filterCondition=${filterCondition}&filterValue=${filterValue}`}</a>
+                        </div>
+            </>
+          
+
+
+            }
         </div>
     )
 };
