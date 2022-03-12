@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import AdminHeader from './AdminHeader';
 import AdminSideBar from './AdminSideBar';
 
@@ -7,6 +7,7 @@ const AdminLayout = ({children}) => {
         <>
             <AdminHeader />
             <AdminSideBar children={children} /> 
+            
         </>
     )
 };

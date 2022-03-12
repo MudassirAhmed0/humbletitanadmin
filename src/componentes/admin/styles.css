@@ -45,6 +45,10 @@ a {
   margin-left: .5rem;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .mlr-auto {
   margin-left: auto;
   margin-right: auto;
@@ -52,6 +56,10 @@ a {
 
 .mr-1 {
   margin-right: 1rem;
+}
+
+.mr-2 {
+  margin-right: 2rem;
 }
 
 .mr-1-2 {
@@ -275,6 +283,10 @@ input[type=number] {
 
 .absolute {
   position: absolute;
+}
+
+.pos-fixed {
+  position: fixed;
 }
 
 .top-0 {
@@ -2877,5 +2889,24 @@ tr:nth-child(even) {
   .Where-We-Operate .card .circleImageCard {
     top: -80px;
   }
+}
+
+.popup-container {
+  background-color: rgba(0, 0, 0, 0.4);
+  -webkit-transition: .4s;
+  transition: .4s;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.popup-container.active {
+  opacity: 1;
+  pointer-events: initial;
+}
+
+.popup {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
 }
 /*# sourceMappingURL=styles.css.map */
