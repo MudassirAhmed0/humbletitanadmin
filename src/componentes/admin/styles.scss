@@ -846,6 +846,13 @@ border-radius: 50%;
 img{
     object-fit: contain;
 }
+.textha{
+    padding: 22px 24px;
+    border: none;
+    font-size: 18px;
+    background: #e0ecf0;
+    border-radius: 8px;
+    }
 .qoot{
     width: 100px;
     height: 100px;
@@ -2451,6 +2458,7 @@ footer {
     .pl-mob-36{
         padding-left: 36px;
     }
+  
     .formInputWrapper{
     
         input,textarea{

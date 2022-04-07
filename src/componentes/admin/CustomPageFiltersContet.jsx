@@ -11,7 +11,10 @@ const CustomPageFiltersContet = () => {
     const { tableName } = useParams()
     const [valueType, setValueType] = useState('')
     const [filterCondition, setFilterCondition] = useState('')
+    const [customizedURL,setCustomizedURL]= useState('')
     const [filterValue, setFilterValue] = useState('')
+    const [headerText,setHeaderText] = useState('')
+    const [headerTextHeading,setHeaderTextHeading] = useState('')
     const [filter, setFilter] = useState('')
     const [filteredData, setFilteredData] = useState([])
     const [integerOptions, setIntegerOptions] = useState([])
@@ -97,10 +100,11 @@ const CustomPageFiltersContet = () => {
             for( let i = 1;i<=50 ;i ++){
                 newData.push(fD[i])
             }
-            setFilteredData([...newData])
+            let d= {data:[...newData],url:customizedURL,headerText:{heading:headerTextHeading,para:headerText}}
+            setFilteredData(d)
          }else{
-
-             setFilteredData([...fD])
+            let d= {data:[...fD],url:customizedURL,headerText:{heading:headerTextHeading,para:headerText}}
+            setFilteredData(d) 
          }
         let newCompanies=[]
         // fD.map(item=>{
@@ -246,11 +250,37 @@ const CustomPageFiltersContet = () => {
                     
                 }
             </div>
-                <div className="flex justify-center w-full mt-4">
+            <div>
+             
+                        <h2 className="text-40 mt-4 text-center text-blue">
+                            Enter The  Customized URL
+                        </h2>
+                        <div className="inputWrapper mt-4">
+                            <input type={'text'} value={customizedURL} onChange={(e) => setCustomizedURL(e.target.value)}  placeholder='Enter the Customized URL  ' />
+                        </div>
+                
+                 
+            </div>
+            <div>
+             
+                        <h2 className="text-40 mt-4 text-center text-blue">
+                            Enter The  Header  Text
+                        </h2>
+                        <div className="inputWrapper mt-4">
+                            <input type={'text'} value={headerTextHeading} onChange={(e) =>  setHeaderTextHeading(e.target.value)}  placeholder='Enter the Header Text Heading  ' />
+                        </div>
+                        <div className="inputWrapper mt-2 textha">
+                            <textarea type={'text'} className='textha'  value={headerText} onChange={(e) =>  setHeaderText(e.target.value)}  placeholder='Enter the Header Text ' />
+                        </div>
+                
+                 
+            </div>
+                
+               {customizedURL &&  !isPublished && <div className="flex justify-center w-full mt-4">
                             <button className="btn btn-primary" data-text='Publish Page ' onClick={publishPage}>
 
                             </button>
-                        </div>
+                        </div>}
 {isPublished &&
                         <div className="flex justify-center w-full mt-4 dir-col align-center">
                             <p className="text-22 text-blue ">Your Page is Succesfully Published!</p>
