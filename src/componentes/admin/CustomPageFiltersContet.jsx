@@ -56,7 +56,8 @@ const CustomPageFiltersContet = () => {
     const filterConditionForString = ["Equal To", "Starting With", "Ending With"]
 
     const publishPage =()=>{
-        axios.post(`https://humbletitanapi.herokuapp.com/filteredData?filterlabel=${filter}&filterCondition=${filterCondition}&filterValue=${filterValue}`,filteredData)
+        let dataToBePublished ={...filteredData,url:customizedURL,headerText:{heading:headerTextHeading,para:headerText}}
+        axios.post(`https://humbletitanapi.herokuapp.com/filteredData?filterlabel=${filter}&filterCondition=${filterCondition}&filterValue=${filterValue}`,dataToBePublished)
         .then((res)=> setIsPublished(true))
         .catch(err=>console.log(err))
     }
@@ -100,10 +101,10 @@ const CustomPageFiltersContet = () => {
             for( let i = 1;i<=50 ;i ++){
                 newData.push(fD[i])
             }
-            let d= {data:[...newData],url:customizedURL,headerText:{heading:headerTextHeading,para:headerText}}
+            let d= {data:[...newData]}
             setFilteredData(d)
          }else{
-            let d= {data:[...fD],url:customizedURL,headerText:{heading:headerTextHeading,para:headerText}}
+            let d= {data:[...fD]}
             setFilteredData(d) 
          }
         let newCompanies=[]
@@ -217,7 +218,7 @@ const CustomPageFiltersContet = () => {
                     </>
                 }
             </div>
-          { loading ? "Loading...":   filteredData.length > 0 && <> <div className="filteredTable  bg-light-blue mt-4">
+          { loading ? "Loading...":   filteredData?.data?.length > 0 && <> <div className="filteredTable  bg-light-blue mt-4">
                 <div className="p-1 flex justify-between">
                     <div className="col-4">
                         <span><h4 className='text-24 text-blue'>Company Symbol</h4></span>
@@ -231,7 +232,7 @@ const CustomPageFiltersContet = () => {
 
                 </div>
                 {
-                    filteredData?.map((item,index)=>
+                    filteredData?.data?.map((item,index)=>
                         <div className="p-1 flex justify-between" key={item?.Symbol + index}>
                         <div className="col-4">
                             <span><h4 className=' text-blue'>{item?.Symbol}</h4></span>
